@@ -3,18 +3,14 @@ package exercitiu1;
 public class Car extends Vehicle {
     private int numDoors;
 
-    public Car() {}
-
-    public Car(String brand, double speed, int mileage, boolean rented, int lastService, int numDoors) {
-        super(brand, speed, mileage, rented, lastService);
+    public Car(String id, String brand, double speed, int numDoors) {
+        super(id, brand, speed);
         this.numDoors = numDoors;
     }
 
-    public int getNumDoors() { return numDoors; }
-
     @Override
     public void sound() {
-        System.out.println("Vroom vroom");
+        System.out.println("PO PO PO PO PO(cu flacara)");
     }
 
     @Override
@@ -27,16 +23,15 @@ public class Car extends Vehicle {
 
     @Override
     public boolean needsService() {
-        if (getMileage() - getLastService() >= 10000) {
-            setLastService(getMileage());
-            return true;
-        }
-        return false;
+        return getMileage() >= 10000;
     }
 
     @Override
     public double rentalPrice(int days) {
-        double base = 50 * days;
-        return numDoors >= 4 ? base * 1.1 : base;
+        double price = 50 * days;
+        if (numDoors >= 4) {
+            price *= 1.1;
+        }
+        return price;
     }
 }
